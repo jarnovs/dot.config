@@ -21,6 +21,7 @@ vim.pack.add{
   { src = "https://github.com/sphamba/smear-cursor.nvim"},
   { src = "https://github.com/ThePrimeagen/harpoon"},
   { src = "https://github.com/mbbill/undotree"},
+  { src = "https://github.com/christoomey/vim-tmux-navigator"}
 }
 
 local builtin = require('telescope.builtin')
