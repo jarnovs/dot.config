@@ -2,14 +2,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.g.mapleader = ' '
 
-vim.opt.laststatus = 0
-
 vim.diagnostic.config({ virtual_text = true })
 
 vim.pack.add{
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/rafamadriz/friendly-snippets' },
-  { src = 'https://github.com/saghen/blink.cmp' },
+  { src = "https://github.com/neovim/nvim-lspconfig"},
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/saghen/blink.cmp" },
   { src = "https://github.com/rebelot/kanagawa.nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
@@ -21,7 +19,12 @@ vim.pack.add{
   { src = "https://github.com/sphamba/smear-cursor.nvim"},
   { src = "https://github.com/ThePrimeagen/harpoon"},
   { src = "https://github.com/mbbill/undotree"},
-  { src = "https://github.com/christoomey/vim-tmux-navigator"}
+  { src = "https://github.com/christoomey/vim-tmux-navigator"},
+  { src = "https://github.com/vimpostor/vim-tpipeline"},
+  { src = "https://github.com/nvim-mini/mini.surround"},
+  { src = "https://github.com/wansmer/treesj"},
+  { src = "https://github.com/abecodes/tabout.nvim"},
+  { src = "https://github.com/folke/flash.nvim"},
 }
 
 local builtin = require('telescope.builtin')
@@ -90,10 +93,10 @@ vim.keymap.set('n', '<leader>wq', ':close<CR>', { noremap = true, silent = true 
 -- Other --
 vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { noremap = true, silent = true })
 
-require('Comment').setup()
+require("Comment").setup()
 require("smear_cursor").toggle()
 
--- Harpoon - 
+-- Harpoon -- 
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
 
@@ -110,3 +113,13 @@ vim.keymap.set("n", "<leader>6", function() ui.nav_file(6) end)
 -- Undotree --
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
+-- Other --
+require('mini.surround').setup()
+require('treesj').setup()
+require('tabout').setup()
+
+-- Word Navigation --
+local flash = require("flash")
+flash.setup()
+
+vim.keymap.set({ "n", "x", "o" }, "zk", flash.jump, { desc = "flash" })
