@@ -25,6 +25,7 @@ vim.pack.add{
   { src = "https://github.com/wansmer/treesj"},
   { src = "https://github.com/abecodes/tabout.nvim"},
   { src = "https://github.com/folke/flash.nvim"},
+  { src = "https://github.com/brenton-leighton/multiple-cursors.nvim"},
 }
 
 local builtin = require('telescope.builtin')
@@ -123,3 +124,21 @@ local flash = require("flash")
 flash.setup()
 
 vim.keymap.set({ "n", "x", "o" }, "zk", flash.jump, { desc = "flash" })
+
+-- Multi Cursor --
+require('multiple-cursors').setup()
+vim.keymap.set({ "n", "i", "x" }, "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", {
+  desc = "Add cursor and move up",
+})
+
+vim.keymap.set({ "n", "i", "x" }, "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", {
+  desc = "Add cursor and move down",
+})
+
+vim.keymap.set({ "n", "i" }, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", {
+  desc = "Add or remove cursor",
+})
+
+-- Tree --
+vim.g.netrw_winsize = 20
+vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { noremap = true, silent = true })
