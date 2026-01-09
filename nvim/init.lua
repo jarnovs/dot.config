@@ -23,9 +23,10 @@ vim.pack.add{
   { src = "https://github.com/vimpostor/vim-tpipeline"},
   { src = "https://github.com/nvim-mini/mini.surround"},
   { src = "https://github.com/wansmer/treesj"},
-  { src = "https://github.com/abecodes/tabout.nvim"},
   { src = "https://github.com/folke/flash.nvim"},
   { src = "https://github.com/brenton-leighton/multiple-cursors.nvim"},
+  { src = "https://github.com/nvim-telescope/telescope-file-browser.nvim"},
+  { src = "https://github.com/preservim/nerdtree"}
 }
 
 local builtin = require('telescope.builtin')
@@ -117,7 +118,6 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 -- Other --
 require('mini.surround').setup()
 require('treesj').setup()
-require('tabout').setup()
 
 -- Word Navigation --
 local flash = require("flash")
@@ -140,5 +140,18 @@ vim.keymap.set({ "n", "i" }, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelet
 })
 
 -- Tree --
-vim.g.netrw_winsize = 20
-vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { noremap = true, silent = true })
+require("telescope").setup {
+  extensions = {
+    file_browser = {
+      theme = "ivy",
+    },
+  },
+}
+require("telescope").load_extension "file_browser"
+
+-- vim.keymap.set("n", "<space>e", ":Telescope file_browser<CR>")
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
+
+-- NerdTree --
+vim.keymap.set('n', '<leader>e', ':NERDTreeToggle<CR>', { silent = true })
